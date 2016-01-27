@@ -31,5 +31,4 @@ Run `grunt build` for building and `grunt serve` for preview.
 Running `npm test` will run the unit tests with karma.
 =======
 # The-Force-Media-Group
-Contributors:
-Gavin Scheele
+
