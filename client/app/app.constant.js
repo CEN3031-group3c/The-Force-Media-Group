@@ -1,13 +1,9 @@
 (function(angular, undefined) {
-  angular.module("fmgApp.constants", [])
+'use strict';
 
-.constant("appConfig", {
-	"userRoles": [
-		"guest",
-		"user",
-		"admin"
-	]
-})
+angular.module('fmgApp.constants', [])
+
+.constant('appConfig', {userRoles:['guest','user','admin']})
 
 ;
 })(angular);
