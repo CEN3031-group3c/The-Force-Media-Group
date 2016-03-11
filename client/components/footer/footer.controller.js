@@ -7,7 +7,6 @@
 (function() {
 
   class FooterController {
-
   }
 
   angular.module('fmgApp')

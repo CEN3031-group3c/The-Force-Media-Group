@@ -8,10 +8,13 @@
 
   class SignUpHeaderController {
 
-    constructor(SignUp, toaster) {
+    constructor(SignUp, toaster, $scope) {
       this.SignUp = SignUp;
       this.phoneNumber = undefined;
       this.toaster = toaster;
+      this.scope = $scope;
+      this.toggle = true;
+      console.log('footer constructed');
     }
 
 
@@ -40,6 +43,16 @@
 
     }
 
+    load() {
+      if(this.toggle) {
+        this.toggle = false;
+        this.scope.$broadcast('startLoading');
+      }
+      else {
+        this.toggle = true;
+        this.scope.$broadcast('stopLoading');
+      }
+    }
 
 
 

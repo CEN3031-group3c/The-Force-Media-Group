@@ -8,6 +8,12 @@ div.navbar.navbar-default.cloudyBackground.navbar-static-top(ng-controller='Navb
         span.icon-bar
       a.navbar-logo(href='/')
         img(src='../assets/images/filler_Logo.jpg' alt='Jarmone Davis Media' height='50px')
+      span#mobileLoader.overlay-loader.pull-right.mobile-loader.visible-xs
+        img.loader-icon(src="../assets/images/cog03.svg", data-cog="cog03")
+
+    #loader.overlay-loader.pull-right.hidden-xs
+      img.loader-icon(src="../assets/images/cog03.svg", data-cog="cog03")
+
 
     div#navbar-main.navbar-collapse.collapse(collapse='nav.isCollapsed')
       ul.nav.navbar-nav
