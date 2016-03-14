@@ -1,15 +1,32 @@
 navbar
 div This is the booking view.
 
-div.container
-  h1 Submit a booking request
-  br
-  form(id="bookingrequest", method="post", action="")
-    div.input
-      span.label Name
-      input(type="text", name="name")
-    div.actions
-      input(type="submit", value="add")
+.container
+  block content
+      h1= title
+      form(name="add-estimation", method="post")
+          div.input
+              span.label Name
+              input(type="text", name="Name")
+          div.input
+              span.label Email
+              input(type="email", name="email")
+          div.input
+              span.label Phone
+              input(type="tel", name="phoneNum")
+          div.input
+              span.label Date of Event
+              input(type="date", name="date")
+          div.input
+              span.label Type of Event
+              select(name="Type")
+                option(value="Speaking") Speaking
+                option(value="Music") Music
+          div.input
+              span.label Description
+              textarea(name="description", cols="40", rows="5")
+          div.actions
+              input(type="submit", value="submit")
 
 
 footer
