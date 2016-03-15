@@ -2,31 +2,31 @@ navbar
 div This is the booking view.
 
 .container
-  block content
-      h1= title
-      form(name="add-estimation", method="post")
-          div.input
-              span.label Name
-              input(type="text", name="Name")
-          div.input
-              span.label Email
-              input(type="email", name="email")
-          div.input
-              span.label Phone
-              input(type="tel", name="phoneNum")
-          div.input
-              span.label Date of Event
-              input(type="date", name="date")
-          div.input
-              span.label Type of Event
-              select(name="Type")
-                option(value="Speaking") Speaking
-                option(value="Music") Music
-          div.input
-              span.label Description
-              textarea(name="description", cols="40", rows="5")
-          div.actions
-              input(type="submit", value="submit")
-
+  form(ng-submit="submit()" ng-controller="BookingCtrl")
+    label(for="Name") Name 
+    input(type="text", name="Name", ng-model="bookingForm.propName")
+    br
+    label(for="Email") Email 
+    input(type="email", name="Email", ng-model="bookingForm.email")
+    br
+    label(for="Phone") Phone # 
+    input(type="tel", name="Phone", ng-model="bookingForm.phoneNum")
+    br
+    label(for="Date") Date 
+    input(type="date", name="Date", ng-model="bookingForm.eventDate")
+    br
+    label(for="Type") Type of Event 
+    select(name="Type", ng-model="bookingForm.eventType")
+      option(value="Speaking") Speaking
+      option(value="Music") Music
+    br
+    label(for="Description") Description
+    input(type="text", name="Description", ng-model="bookingForm.descript")
+    br
+    input(type="submit" value="Submit")
+            
+            
+      
+        
 
 footer
