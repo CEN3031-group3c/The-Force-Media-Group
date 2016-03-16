@@ -1,27 +1,28 @@
 navbar
-div This is the booking view.
-
+  
 .container
-  form(ng-submit="submit()" ng-controller="BookingCtrl")
-    label(for="Name") Name 
-    input(type="text", name="Name", ng-model="bookingForm.propName")
-    br
-    label(for="Email") Email 
-    input(type="email", name="Email", ng-model="bookingForm.email")
-    br
-    label(for="Phone") Phone # 
-    input(type="tel", name="Phone", ng-model="bookingForm.phoneNum")
-    br
-    label(for="Date") Date 
-    input(type="date", name="Date", ng-model="bookingForm.eventDate")
-    br
-    label(for="Type") Type of Event 
-    select(name="Type", ng-model="bookingForm.eventType")
-      option(value="Speaking") Speaking
-      option(value="Music") Music
-    br
-    label(for="Description") Description
-    input(type="text", name="Description", ng-model="bookingForm.descript")
+  form(ng-submit="submit()" ng-controller="BookingCtrl" )
+    .form-group
+      label(for="Name") Name/Organization *
+      input.form-control(type="text", name="Name", ng-model="BookingCtrl.propName")
+    .form-group
+      label(for="Email") Contact Email *
+      input.form-control(type="email", name="Email", ng-model="BookingCtrl.email")
+    .form-group
+      label(for="Phone") Contact Phone *
+      input.form-control(type="tel", name="Phone", ng-model="BookingCtrl.phoneNum")
+    .form-group
+      label(for="Date") Event MM/DD/YYYY HH:MM PM/AM *
+      input.form-control(type="datetime-local", name="Date", ng-model="BookingCtrl.eventDate")
+    .form-group
+      label(for="Type") Type of Event * &nbsp;
+      br
+      select(name="Type", ng-model="BookingCtrl.eventType")
+        option(value="Speaking") Speaking
+        option(value="Music") Music
+    .form-group
+      label(for="Description") Event Description *
+      textarea.form-control(name="Description", rows="3", ng-model="BookingCtrl.descript")
     br
     input(type="submit" value="Submit")
             
