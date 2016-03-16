@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fmgApp')
-  .controller('BookingCtrl', ['$scope', '$http', function($scope, $http) {
+  .controller('BookingCtrl', ['$scope', '$http', 'emailService', function($scope, $http, emailService) {
      function resetForm() {
         $scope.propName = '';
         $scope.phoneNum = '';
@@ -14,12 +14,17 @@ angular.module('fmgApp')
     $scope.submit = function() {
       if ( $scope.BookingCtrl.propName && $scope.BookingCtrl.phoneNum && $scope.BookingCtrl.email && $scope.BookingCtrl.eventDate && $scope.BookingCtrl.eventType && $scope.BookingCtrl.descript ) {
           // $http.post('/someUrl', data, config).then(successCallback, errorCallback);
-          $http.post('/api/BookingCtrl', $scope.BookingCtrl).then( function(data) {
-              console.log('SUCCESS');
-              resetForm();
-              // May want to redirect somewhere after success, or take the received data back, and display it somehow?
-            }, function(err) { console.log(err); }
-          );
+          // $http.post('/api/BookingCtrl', $scope.BookingCtrl).then( function(data) {
+          //     console.log('SUCCESS');
+          //     resetForm();
+          //     // May want to redirect somewhere after success, or take the received data back, and display it somehow?
+          //   }, function(err) { console.log(err); }
+          // );
+          console.log('Calling sendBookingEmail');
+          emailService.sendBookingEmail($scope.BookingCtrl.propName, $scope.BookingCtrl.phoneNum, $scope.BookingCtrl.email, $scope.BookingCtrl.eventDate, $scope.BookingCtrl.eventType, $scope.BookingCtrl.descript).success(function(data) {
+            console.log(data);
+          })
+
       }
     };
   }]);
