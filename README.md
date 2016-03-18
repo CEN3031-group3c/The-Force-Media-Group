@@ -9,7 +9,7 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 - [Git](https://git-scm.com/)
 - [Node.js and npm](nodejs.org) Node ^4.2.3, npm ^2.14.7
 - [Bower](bower.io) (`npm install --global bower`)
-- [Grunt](http://gruntjs.com/) (`npm install --global grunt-cli`)
+- [Grunt](http://gruntjs.com/) (`npm install --global grunt-cli gulp`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
 
 ### Developing
@@ -31,4 +31,3 @@ Run `grunt build` for building and `grunt serve` for preview.
 Running `npm test` will run the unit tests with karma.
 =======
 # The-Force-Media-Group
-

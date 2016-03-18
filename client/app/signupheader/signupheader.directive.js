@@ -6,8 +6,6 @@ angular.module('fmgApp')
       templateUrl: 'app/signupheader/signupheader.html',
       restrict: 'EA',
       controller: 'SignUpHeaderController',
-      controllerAs: 'ctrl',
-      link: function (scope, element, attrs) {
-      }
+      controllerAs: 'ctrl'
     };
   });

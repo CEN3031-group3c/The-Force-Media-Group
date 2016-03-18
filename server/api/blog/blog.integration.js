@@ -3,40 +3,41 @@
 var app = require('../..');
 import request from 'supertest';
 
-var newThing;
+var newBlog;
 
-describe('Thing API:', function() {
+describe('Blog API:', function() {
 
-  describe('GET /api/things', function() {
-    var things;
+  describe('GET /api/blogs', function() {
+    var blogs;
 
     beforeEach(function(done) {
       request(app)
-        .get('/api/things')
+        .get('/api/blogs')
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
             return done(err);
           }
-          things = res.body;
+          blogs = res.body;
           done();
         });
     });
 
     it('should respond with JSON array', function() {
-      things.should.be.instanceOf(Array);
+      blogs.should.be.instanceOf(Array);
     });
 
   });
 
-  describe('POST /api/things', function() {
+  describe('POST /api/blogs', function() {
     beforeEach(function(done) {
       request(app)
-        .post('/api/things')
+        .post('/api/blogs')
         .send({
-          name: 'New Thing',
-          info: 'This is the brand new thing!!!'
+          title: 'New Blog',
+          body: 'This is the brand new blog!!!',
+          published: true
         })
         .expect(201)
         .expect('Content-Type', /json/)
@@ -44,55 +45,58 @@ describe('Thing API:', function() {
           if (err) {
             return done(err);
           }
-          newThing = res.body;
+          newBlog = res.body;
           done();
         });
     });
 
-    it('should respond with the newly created thing', function() {
-      newThing.name.should.equal('New Thing');
-      newThing.info.should.equal('This is the brand new thing!!!');
+    it('should respond with the newly created blog', function() {
+      newBlog.title.should.equal('New Blog');
+      newBlog.body.should.equal('This is the brand new blog!!!');
+      newBlog.published.should.equal(true);
     });
 
   });
 
-  describe('GET /api/things/:id', function() {
-    var thing;
+  describe('GET /api/blogs/:id', function() {
+    var blog;
 
     beforeEach(function(done) {
       request(app)
-        .get('/api/things/' + newThing._id)
+        .get('/api/blogs/' + newBlog._id)
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
             return done(err);
           }
-          thing = res.body;
+          blog = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      thing = {};
+      blog = {};
     });
 
-    it('should respond with the requested thing', function() {
-      thing.name.should.equal('New Thing');
-      thing.info.should.equal('This is the brand new thing!!!');
+    it('should respond with the requested blog', function() {
+      blog.title.should.equal('New Blog');
+      blog.body.should.equal('This is the brand new blog!!!');
+      blog.published.should.equal(true);
     });
 
   });
 
-  describe('PUT /api/things/:id', function() {
-    var updatedThing;
+  describe('PUT /api/blogs/:id', function() {
+    var updatedBlog;
 
     beforeEach(function(done) {
       request(app)
-        .put('/api/things/' + newThing._id)
+        .put('/api/blogs/' + newBlog._id)
         .send({
-          name: 'Updated Thing',
-          info: 'This is the updated thing!!!'
+          title: 'Updated Blog',
+          body: 'This is the updated blog!!!',
+          published: false
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -100,27 +104,28 @@ describe('Thing API:', function() {
           if (err) {
             return done(err);
           }
-          updatedThing = res.body;
+          updatedBlog = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      updatedThing = {};
+      updatedBlog = {};
     });
 
-    it('should respond with the updated thing', function() {
-      updatedThing.name.should.equal('Updated Thing');
-      updatedThing.info.should.equal('This is the updated thing!!!');
+    it('should respond with the updated blog', function() {
+      updatedBlog.title.should.equal('Updated Blog');
+      updatedBlog.body.should.equal('This is the updated blog!!!');
+      updatedBlog.published.should.equal(false);
     });
 
   });
 
-  describe('DELETE /api/things/:id', function() {
+  describe('DELETE /api/blogs/:id', function() {
 
     it('should respond with 204 on successful removal', function(done) {
       request(app)
-        .delete('/api/things/' + newThing._id)
+        .delete('/api/blogs/' + newBlog._id)
         .expect(204)
         .end((err, res) => {
           if (err) {
@@ -130,9 +135,9 @@ describe('Thing API:', function() {
         });
     });
 
-    it('should respond with 404 when thing does not exist', function(done) {
+    it('should respond with 404 when blog does not exist', function(done) {
       request(app)
-        .delete('/api/things/' + newThing._id)
+        .delete('/api/blogs/' + newBlog._id)
         .expect(404)
         .end((err, res) => {
           if (err) {

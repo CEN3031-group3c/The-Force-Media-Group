@@ -21,6 +21,12 @@ module.exports = function(config) {
       'client/bower_components/lodash/lodash.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
+      'client/bower_components/br-validations/releases/br-validations.js',
+      'client/bower_components/string-mask/src/string-mask.js',
+      'client/bower_components/angular-input-masks/angular-input-masks-standalone.min.js',
+      'client/bower_components/angular-ui-mask/dist/mask.js',
+      'client/bower_components/angular-animate/angular-animate.js',
+      'client/bower_components/AngularJS-Toaster/toaster.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       'client/bower_components/livereload-js/dist/livereload.js',
       // endbower

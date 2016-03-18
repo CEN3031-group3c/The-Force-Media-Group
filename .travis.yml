@@ -1,13 +1,12 @@
 language: node_js
 node_js:
-  - 4.2.3
-matrix:
-  fast_finish: true
-  allow_failures:
-    - node_js: 5.1.1
+- 4.4.0
 before_script:
-  - npm install -g bower grunt-cli gulp
-  - gem install sass
-  - bower install
+- npm install -g bower grunt-cli gulp
+- gem install sass
+- bower install
 services: mongodb
 script: npm run test
+env:
+  global:
+  - secure: isq2wkflUWXVoDqmsK1viBfdG+xm1kt7a+jUmQOYpz9fVHOeEiAbYjUW9cG6lMmEnVKF0vtSgGTyY7RTw7lQ4tIDyrNTyDQLDu7NVdujHKPXxPE+6KQnCmqXPgfY/NdxDCouKkU3ZSEu/sP7pdkiZKAT9Za4nUeU9fW9QOl8Bw8lW99JwsL1i1OFWvcT0MHWL/dGGqRk5cWsdyRKo7rogaW+B7+KwyI6UQWXmHwz4gJB0qj4zw73H3Xhzm0FifgOMX9Sgy1/PU3nJPJuxjfxw9IhGEkM2s3af5RNys1PSuXOSM+5ItjX4UjBgMcuvAI5ul5LlmvZEnC6WAFXvavNuMfT6o4nCxkf+L/Q/UzwOWAN7LNrEf71/cRt/FVms2kNZwVZu0HayIy3tEc+2igZlvWXmV++IPr873Lb21ysbhSigZmkSPHdzNmhaps526T+dXBRCUWsZnJBt1x/ZgTygLH3Ltqfu0APSa1U3gZN32IYcYy7VpCQcdO4bGqOH1OjhePhgWFAPWlKPYjNBvoKqv8EwTl1Qkmm6nkRyojMy01ty8QKdzPXSPKE8RYTNwjQ6P7SSoSWEe3fkOgsFmrXuiaMuJKT832KU5eD2WRQPskpxjcUgqEYxIYPWVYl7YdbHTAIw2egf00AQ7YyLkRwYQorcjqbq9oE14ng6gMKnBI=

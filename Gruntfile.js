@@ -1,4 +1,4 @@
-// Generated on 2016-01-28 using generator-angular-fullstack 3.3.0-beta.0
+// Generated on 2016-03-14 using generator-angular-fullstack 3.4.2
 'use strict';
 
 module.exports = function (grunt) {
@@ -141,7 +141,7 @@ module.exports = function (grunt) {
         },
         src: ['<%= yeoman.server %>/**/*.{spec,integration}.js']
       },
-      all: ['<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock).js'],
+      all: ['<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock|app.constant).js'],
       test: {
         src: ['<%= yeoman.client %>/{app,components}/**/*.{spec,mock}.js']
       }
@@ -255,8 +255,7 @@ module.exports = function (grunt) {
       dist: {
         src: [
           '<%= yeoman.dist %>/<%= yeoman.client %>/!(bower_components){,*/}*.{js,css}',
-          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/fonts/*'
+          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -283,6 +282,9 @@ module.exports = function (grunt) {
         ],
         // This is so we update image references in our ng-templates
         patterns: {
+          css: [
+            [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']
+          ],
           js: [
             [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
           ]
@@ -395,7 +397,8 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             'package.json',
-            '<%= yeoman.server %>/**/*'
+            '<%= yeoman.server %>/**/*',
+            '!<%= yeoman.server %>/config/local.env.sample.js'
           ]
         }]
       },
@@ -585,7 +588,10 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.server %>',
-          src: ['**/*.{js,json}'],
+          src: [
+            '**/*.js',
+            '!config/local.env.sample.js'
+          ],
           dest: '<%= yeoman.dist %>/<%= yeoman.server %>'
         }]
       }
@@ -615,7 +621,7 @@ module.exports = function (grunt) {
             return '<script src="' + filePath + '"></script>';
           },
           sort: function(a, b) {
-            var module = /\.module\.js$/;
+            var module = /\.module\.(js|ts)$/;
             var aMod = module.test(a);
             var bMod = module.test(b);
             // inject *.module.js first
@@ -842,7 +848,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:tslint',
+    'newer:jshint',
     'test',
     'build'
   ]);

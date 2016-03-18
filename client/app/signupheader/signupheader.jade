@@ -10,7 +10,6 @@
       .col-lg-5.col-md-2
 
   .col-sm-1
-
   .col-xs-4.col-sm-5
     table.pull-right
       tr
@@ -37,3 +36,6 @@
             img(src="../assets/images/linkdin_circle.png").socialMediaIcon.clickable
 
         td.iconSpacer
+        td.clickable
+          a(ng-click="ctrl.load()")
+            | here

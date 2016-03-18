@@ -1,4 +1,4 @@
-// Generated on 2016-02-03 using generator-angular-fullstack 3.3.0
+// Generated on 2016-03-14 using generator-angular-fullstack 3.4.2
 'use strict';
 
 import _ from 'lodash';
@@ -38,7 +38,10 @@ const paths = {
         bower: `${clientPath}/bower_components/`
     },
     server: {
-        scripts: [`${serverPath}/**/!(*.spec|*.integration).js`],
+        scripts: [
+          `${serverPath}/**/!(*.spec|*.integration).js`,
+          `!${serverPath}/config/local.env.sample.js`
+        ],
         json: [`${serverPath}/**/*.json`],
         test: {
           integration: [`${serverPath}/**/*.integration.js`, 'mocha.global.js'],
@@ -331,9 +334,9 @@ gulp.task('watch', () => {
     });
 
     plugins.watch(paths.client.views)
-        .pipe(plugins.plumber())
         .pipe(plugins.jade())
         .pipe(gulp.dest('.tmp'))
+        .pipe(plugins.plumber())
         .pipe(plugins.livereload());
 
     plugins.watch(paths.client.scripts) //['inject:js']
@@ -440,13 +443,17 @@ gulp.task('wiredep:test', () => {
 //FIXME: looks like font-awesome isn't getting loaded
 gulp.task('build', cb => {
     runSequence(
-        'clean:dist',
-        'clean:tmp',
+        [
+            'clean:dist',
+            'clean:tmp'
+        ],
+        'jade',
         'inject',
         'wiredep:client',
         [
             'build:images',
             'copy:extras',
+            'copy:fonts',
             'copy:assets',
             'copy:server',
             'transpile:server',
@@ -464,10 +471,8 @@ gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant'], ()
     var jsFilter = plugins.filter('**/*.js');
     var cssFilter = plugins.filter('**/*.css');
     var htmlBlock = plugins.filter(['**/*.!(html)']);
-    var assetsFilter = plugins.filter('**/*.{js,css}');
 
     return gulp.src(paths.client.mainView)
-        .pipe(plugins.jade({pretty: true}))
         .pipe(plugins.useref())
             .pipe(appFilter)
                 .pipe(plugins.addSrc.append('.tmp/templates.js'))
@@ -487,12 +492,11 @@ gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant'], ()
                 .pipe(plugins.rev())
             .pipe(htmlBlock.restore())
         .pipe(plugins.revReplace({manifest}))
-        .pipe(assetsFilter)
         .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
 });
 
 gulp.task('html', function() {
-    return gulp.src(`${clientPath}/{app,components}/**/*.html`)
+    return gulp.src(`.tmp/{app,components}/**/*.html`)
         .pipe(plugins.angularTemplatecache({
             module: 'fmgApp'
         }))
@@ -542,6 +546,11 @@ gulp.task('copy:extras', () => {
         `${clientPath}/.htaccess`
     ], { dot: true })
         .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
+});
+
+gulp.task('copy:fonts', () => {
+    return gulp.src(`${clientPath}/bower_components/{bootstrap,font-awesome}/fonts/**/*`, { dot: true })
+        .pipe(gulp.dest(`${paths.dist}/${clientPath}/bower_components`));
 });
 
 gulp.task('copy:assets', () => {
