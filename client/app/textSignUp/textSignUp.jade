@@ -1,0 +1,6 @@
+form.form-inline
+    label(style="margin-top:8px; margin-right: 5px; text-align:right").control-label.labelNoFormat
+      | Get Updates
+    input(ui-mask="(999) 999-9999" ng-model="phoneNumber")#signupEmailBox.form-control
+    button(ng-click="createContact()").btn.btn-xs.btn-default#subscribeButton
+      | Subscribe

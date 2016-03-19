@@ -6,7 +6,6 @@ angular.module('fmgApp')
       templateUrl: 'components/footer/footer.html',
       restrict: 'E',
       link: function(scope, element) {
-        element.addClass('footer');
       }
     };
   });

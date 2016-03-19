@@ -3,7 +3,7 @@
 
 angular.module('fmgApp.constants', [])
 
-.constant('appConfig', {YouTubeKey:'',userRoles:['guest','user','admin']})
+.constant('appConfig', {YouTubeKey:'AIzaSyCHtYjbNYLFs-B3tML3SmXGv0-fwaGAxuw',userRoles:['guest','user','admin']})
 
 ;
 })(angular);
