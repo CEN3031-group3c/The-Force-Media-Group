@@ -128,7 +128,7 @@ export function sendBookingEmail(req, res){
     from: 'forcemediagroupdb@gmail.com', // sender address
     to: 'mrdjmeyers@gmail.com', // list of receivers
     subject: 'New Booking Request', // Subject line
-    text: 'Requester Name: ' + req.params.propName + '\nRequester Email: ' + req.params.email + '\nRequester Phone: ' + req.params.phoneNum + '\nEvent Type: ' + req.params.eventType + '\nEvent Description: ' + req.params.descript + '\nEvent Date/Time: ' + req.params.eventDate +, // plaintext body
+    text: 'Requester Name: ' + req.params.propName + '\nRequester Email: ' + req.params.email + '\nRequester Phone: ' + req.params.phoneNum + '\nEvent Type: ' + req.params.eventType + '\nEvent Description: ' + req.params.descript + '\nEvent Date/Time: ' + req.params.eventDate // plaintext body
   };
 
   // send mail with defined transport object
