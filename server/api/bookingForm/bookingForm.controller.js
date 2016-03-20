@@ -121,7 +121,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 // setup e-mail data with unicode symbols
-
+//Will send an email to dj for now when a booking request is made.
 export function sendBookingEmail(req, res){
 
   var mailOptions = {
