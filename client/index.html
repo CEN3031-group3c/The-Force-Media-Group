@@ -13,7 +13,6 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css" />
       <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
       <!-- endbower -->
     <!-- endbuild -->
@@ -65,6 +64,7 @@
       <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
       <script src="bower_components/angular-animate/angular-animate.js"></script>
       <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
@@ -73,26 +73,27 @@
       <script src="app/admin/admin.module.js"></script>
       <script src="components/auth/auth.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="app/account/account.js"></script>
-      <script src="app/account/login/login.controller.js"></script>
-      <script src="app/account/settings/settings.controller.js"></script>
-      <script src="app/account/signup/signup.controller.js"></script>
+      <script src="app/store/store.js"></script>
       <script src="app/admin/admin.controller.js"></script>
+      <script src="app/account/account.js"></script>
       <script src="app/admin/admin.router.js"></script>
       <script src="app/app.constant.js"></script>
       <script src="app/bio/bio.controller.js"></script>
       <script src="app/bio/bio.js"></script>
       <script src="app/blog/blog.controller.js"></script>
       <script src="app/blog/blog.js"></script>
+      <script src="app/blogService/blogService.service.js"></script>
       <script src="app/booking/booking.controller.js"></script>
       <script src="app/booking/booking.js"></script>
+      <script src="app/commentService/comment.service.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
       <script src="app/store/store.controller.js"></script>
-      <script src="app/store/store.js"></script>
+      <script src="app/account/login/login.controller.js"></script>
       <script src="app/textSignUp/textSignUp.directive.js"></script>
       <script src="app/textSignUp/textSignUp.factory.js"></script>
       <script src="app/youtube/youtube.directive.js"></script>
+      <script src="app/account/settings/settings.controller.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/interceptor.service.js"></script>
       <script src="components/auth/router.decorator.js"></script>
@@ -105,6 +106,7 @@
       <script src="components/navbar/navbar.directive.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
+      <script src="app/account/signup/signup.controller.js"></script>
       <script src="components/util/util.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->

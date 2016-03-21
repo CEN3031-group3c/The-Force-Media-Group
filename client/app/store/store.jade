@@ -1,4 +1,7 @@
 navbar
-div This is the store view.
-
+div(ng-repeat="item in items")
+  .col-lg-3
+    .panel.panel-default
+      .panel-body
+        img(ng-src="{{item.Picture}}")
 footer
