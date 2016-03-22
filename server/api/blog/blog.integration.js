@@ -1,11 +1,48 @@
 'use strict';
 
-var app = require('../..');
+import app from '../..';
+import User from '../user/user.model';
 import request from 'supertest';
 
 var newBlog;
 
 describe('Blog API:', function() {
+  var adminUser, token;
+
+  // Clear users before testing
+  before(function() {
+    return User.remove().then(function() {
+      adminUser = new User({
+        provider: 'local',
+        role: 'admin',
+        name: 'I AM ADMIN',
+        email: 'admin@admin.com',
+        password: 'admin123'
+      });
+
+      return adminUser.save();
+    });
+  });
+
+  before(function(done) {
+    request(app)
+      .post('/auth/local')
+      .send({
+        email: 'admin@admin.com',
+        password: 'admin123'
+      })
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        token = res.body.token;
+        done();
+      });
+  });
+
+  // Clear users after testing
+  after(function() {
+    return User.remove();
+  });
 
   describe('GET /api/blogs', function() {
     var blogs;
@@ -34,6 +71,7 @@ describe('Blog API:', function() {
     beforeEach(function(done) {
       request(app)
         .post('/api/blogs')
+        .set('authorization', 'Bearer ' + token)
         .send({
           title: 'New Blog',
           body: 'This is the brand new blog!!!',
@@ -93,6 +131,7 @@ describe('Blog API:', function() {
     beforeEach(function(done) {
       request(app)
         .put('/api/blogs/' + newBlog._id)
+        .set('authorization', 'Bearer ' + token)
         .send({
           title: 'Updated Blog',
           body: 'This is the updated blog!!!',
@@ -126,6 +165,7 @@ describe('Blog API:', function() {
     it('should respond with 204 on successful removal', function(done) {
       request(app)
         .delete('/api/blogs/' + newBlog._id)
+        .set('authorization', 'Bearer ' + token)
         .expect(204)
         .end((err, res) => {
           if (err) {
@@ -138,6 +178,7 @@ describe('Blog API:', function() {
     it('should respond with 404 when blog does not exist', function(done) {
       request(app)
         .delete('/api/blogs/' + newBlog._id)
+        .set('authorization', 'Bearer ' + token)
         .expect(404)
         .end((err, res) => {
           if (err) {

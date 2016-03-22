@@ -33,7 +33,7 @@ export default function(app) {
   app.use(cookieParser());
   app.use(passport.initialize());
 
-  // Persist sessions with mongoStore / sequelizeStore
+  // Persist sessions with MongoStore / sequelizeStore
   // We need to enable sessions for passport-twitter because it's an
   // oauth 1.0 strategy, and Lusca depends on sessions
   app.use(session({
@@ -80,7 +80,6 @@ export default function(app) {
   if ('development' === env || 'test' === env) {
     app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(app.get('appPath')));
-    app.use(express.static(path.join(__dirname, 'client', 'assets')));
     app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last
   }

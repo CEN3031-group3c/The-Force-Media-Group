@@ -1,5 +1,7 @@
 navbar
 .container
+  button.btn.btn-xs.btn-default(ng-click="admin.showDialog()")
+    | Send text
   p
     | The delete user and user index api routes are restricted to users with the 'admin' role.
   ul.list-group
@@ -9,3 +11,13 @@ navbar
       span.text-muted {{user.email}}
       a.trash(ng-click='admin.delete(user)')
         span.glyphicon.glyphicon-trash.pull-right
+
+
+  modal-dialog(show="showDialog" dialog-title="Send text message to users" height="250px" width="30%")
+    textarea(placeholder="Hey everyone! Check out the new video." ng-model="admin.textBody" style="margin-top:20px;height:100px;").form-control
+
+    div(style="margin-top:10px")
+      button.btn.btn-xs.btn-default(ng-click="admin.hideDialog()")
+        | Cancel
+      button.btn.btn-xs.btn-success#removeItemButton(ng-click="admin.sendText()")
+        | Send Text

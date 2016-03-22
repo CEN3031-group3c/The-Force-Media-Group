@@ -1,4 +1,30 @@
-navbar
-div This is the store view.
 
-footer
+navbar
+.container
+  .row
+    .col-lg-12.text-right
+      button.crestBackground.btn.btn-default.btn-lg#cart(class="glyphicon glyphicon-shopping-cart" ui-sref="cart({items: addedItems})")
+  .row
+    div(ng-repeat="item in items")
+      .col-lg-4.col-md-4.col-sm-5.col-xs-6
+        .panel.panel-default
+          .panel-body.text-center
+            img.img-responsive.center-block(ng-src="{{item.Picture}}" ng-click="seeItem($index)")
+            h4.row.text-center
+              {{item.Name}}
+            h5.row.text-center.crestColor
+              |${{item.Price}}
+            .row.text-center
+              button.crestBackground.btn.btn-default(ng-click="addToCart(item)")
+                |Add to Cart
+footer.cloudyBackground
+
+modal-dialog(show="showDialog" height="55%" width="50%")
+  p
+    img.img-responsive.center-block(ng-src="{{selectedItem.Picture}}")
+    h4.row.text-center
+      {{selectedItem.Name}}
+    h4.row.text-center
+      |${{selectedItem.Price}}
+    h4.row.text-center  
+      {{selectedItem.Description}}

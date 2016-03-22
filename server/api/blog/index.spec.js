@@ -10,6 +10,15 @@ var blogCtrlStub = {
   destroy: 'blogCtrl.destroy'
 };
 
+var authServiceStub = {
+  isAuthenticated() {
+    return 'authService.isAuthenticated';
+  },
+  hasRole(role) {
+    return 'authService.hasRole.' + role;
+  }
+};
+
 var routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
@@ -25,7 +34,8 @@ var blogIndex = proxyquire('./index.js', {
       return routerStub;
     }
   },
-  './blog.controller': blogCtrlStub
+  './blog.controller': blogCtrlStub,
+  '../../auth/auth.service': authServiceStub
 });
 
 describe('Blog API Router:', function() {
@@ -58,7 +68,7 @@ describe('Blog API Router:', function() {
 
     it('should route to blog.controller.create', function() {
       routerStub.post
-        .withArgs('/', 'blogCtrl.create')
+        .withArgs('/', 'authService.hasRole.admin', 'blogCtrl.create')
         .should.have.been.calledOnce;
     });
 
@@ -68,7 +78,7 @@ describe('Blog API Router:', function() {
 
     it('should route to blog.controller.update', function() {
       routerStub.put
-        .withArgs('/:id', 'blogCtrl.update')
+        .withArgs('/:id', 'authService.hasRole.admin', 'blogCtrl.update')
         .should.have.been.calledOnce;
     });
 
@@ -78,7 +88,7 @@ describe('Blog API Router:', function() {
 
     it('should route to blog.controller.update', function() {
       routerStub.patch
-        .withArgs('/:id', 'blogCtrl.update')
+        .withArgs('/:id', 'authService.hasRole.admin', 'blogCtrl.update')
         .should.have.been.calledOnce;
     });
 
@@ -88,7 +98,7 @@ describe('Blog API Router:', function() {
 
     it('should route to blog.controller.destroy', function() {
       routerStub.delete
-        .withArgs('/:id', 'blogCtrl.destroy')
+        .withArgs('/:id', 'authService.hasRole.admin', 'blogCtrl.destroy')
         .should.have.been.calledOnce;
     });
 

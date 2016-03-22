@@ -7,7 +7,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 /**
  * App-wide Styles
  */
-
+/*woot*/
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
@@ -56,17 +56,18 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 
 
 // Component styles are injected through grunt
-// injector
+/* inject:scss */
 @import 'admin/admin.scss';
 @import 'bio/bio.scss';
 @import 'blog/blog.scss';
 @import 'booking/booking.scss';
+@import 'cart/cart.scss';
 @import 'main/main.scss';
-@import 'signupheader/signupheader.scss';
 @import 'store/store.scss';
+@import 'textSignUp/textSignUp.scss';
 @import 'youtube/youtube.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
 @import '../components/navbar/navbar.scss';
 @import '../components/oauth-buttons/oauth-buttons.scss';
-// endinjector
+/* endinject */

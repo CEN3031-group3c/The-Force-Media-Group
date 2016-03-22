@@ -1,0 +1,39 @@
+.itemName {
+  font-size: 18px;
+}
+
+.itemDescription {
+  font-size: 12px;
+}
+
+.itemPrice {
+  color: #b12704;
+}
+
+.itemPicture {
+  height: 100px;
+  width: 100px;
+}
+
+.cartItemTable {
+  position:relative;
+  width:100%;
+
+}
+
+.removeButtontd {
+  width:30px;
+}
+
+.removeButton {
+  color: #b12704;
+  cursor:pointer;
+}
+
+#removeItemButton {
+  margin-left: 10px;
+}
+
+.tdLabel {
+  text-align:right;
+}

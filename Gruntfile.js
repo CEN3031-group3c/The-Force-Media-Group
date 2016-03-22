@@ -1,4 +1,4 @@
-// Generated on 2016-03-14 using generator-angular-fullstack 3.4.2
+// Generated on 2016-03-20 using generator-angular-fullstack 3.5.0
 'use strict';
 
 module.exports = function (grunt) {
@@ -568,10 +568,7 @@ module.exports = function (grunt) {
     // Compiles ES6 to JavaScript using Babel
     babel: {
       options: {
-        sourceMap: true,
-        optional: [
-          'es7.classProperties'
-        ]
+        sourceMap: true
       },
       client: {
         files: [{
@@ -583,7 +580,10 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          optional: ['runtime']
+          plugins: [
+            'transform-class-properties',
+            'transform-runtime'
+          ]
         },
         files: [{
           expand: true,
@@ -649,8 +649,8 @@ module.exports = function (grunt) {
             filePath = filePath.replace('/' + yoClient + '/components/', '../components/');
             return '@import \'' + filePath + '\';';
           },
-          starttag: '// injector',
-          endtag: '// endinjector'
+          starttag: '/* inject:scss */',
+          endtag: '/* endinject */'
         },
         files: {
           '<%= yeoman.client %>/app/app.scss': [
@@ -829,6 +829,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'env:all',
     'concurrent:pre',
     'concurrent:dist',
     'injector',

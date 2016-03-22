@@ -11,7 +11,8 @@ angular.module('fmgApp', [
   'ui.bootstrap',
   'validation.match',
   'ui.mask',
-  'toaster'
+  'toaster',
+  'ngModal'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

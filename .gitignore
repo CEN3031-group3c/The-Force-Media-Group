@@ -5,15 +5,14 @@ public
 .idea
 client/bower_components
 dist
-/server/config/local.env.js
+server/config/local.env.js
 npm-debug.log
 .DS_Store
 
-/client/app/app.constant.js
-/server/config/environment/development.js
-/server/config/environment/ngconstant.secret.js
-/server/config/environment/production.js
-/server/config/environment/test.js
+client/app/app.constant.js
+server/config/environment/development.js
+server/config/environment/production.js
+server/config/environment/test.js
 coverage
 
 

@@ -1,6 +1,6 @@
 {
   "generator-angular-fullstack": {
-    "generatorVersion": "3.3.0",
+    "generatorVersion": "3.5.0",
     "endpointDirectory": "server/api/",
     "insertRoutes": true,
     "registerRoutesFile": "server/routes.js",
@@ -40,14 +40,17 @@
   "generator-ng-component": {
     "routeDirectory": "client/app/",
     "directiveDirectory": "client/app/",
+    "componentDirectory": "app/components/",
     "filterDirectory": "client/app/",
     "serviceDirectory": "client/app/",
     "basePath": "client",
     "moduleName": "",
+    "modulePrompt": true,
     "filters": [
       "uirouter",
       "jasmine",
-      "uirouter"
+      "uirouter",
+      "es6"
     ],
     "extensions": [
       "babel",
@@ -61,6 +64,7 @@
     "serviceTemplates": "",
     "factoryTemplates": "",
     "controllerTemplates": "",
+    "componentTemplates": "",
     "decoratorTemplates": "",
     "providerTemplates": "",
     "routeTemplates": ""

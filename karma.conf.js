@@ -27,6 +27,8 @@ module.exports = function(config) {
       'client/bower_components/angular-ui-mask/dist/mask.js',
       'client/bower_components/angular-animate/angular-animate.js',
       'client/bower_components/AngularJS-Toaster/toaster.js',
+      'client/bower_components/moment/moment.js',
+      'client/bower_components/ngModal/dist/ng-modal.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       'client/bower_components/livereload-js/dist/livereload.js',
       // endbower
@@ -52,10 +54,7 @@ module.exports = function(config) {
 
     babelPreprocessor: {
       options: {
-        sourceMap: 'inline',
-        optional: [
-          'es7.classProperties'
-        ]
+        sourceMap: 'inline'
       },
       filename: function (file) {
         return file.originalPath.replace(/\.js$/, '.es5.js');

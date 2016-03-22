@@ -1,4 +1,4 @@
-// Generated on 2016-03-14 using generator-angular-fullstack 3.4.2
+// Generated on 2016-03-20 using generator-angular-fullstack 3.5.0
 'use strict';
 
 import _ from 'lodash';
@@ -131,15 +131,16 @@ let styles = lazypipe()
 
 let transpileClient = lazypipe()
     .pipe(plugins.sourcemaps.init)
-    .pipe(plugins.babel, {
-        optional: ['es7.classProperties']
-    })
+    .pipe(plugins.babel)
     .pipe(plugins.sourcemaps.write, '.');
 
 let transpileServer = lazypipe()
     .pipe(plugins.sourcemaps.init)
     .pipe(plugins.babel, {
-        optional: ['runtime']
+        plugins: [
+            'transform-class-properties',
+            'transform-runtime'
+        ]
     })
     .pipe(plugins.sourcemaps.write, '.');
 
@@ -233,8 +234,6 @@ gulp.task('inject:scss', () => {
             gulp.src(_.union(paths.client.styles, ['!' + paths.client.mainStyle]), {read: false})
                 .pipe(plugins.sort()),
             {
-                starttag: '// injector',
-                endtag: '// endinjector',
                 transform: (filepath) => {
                     let newPath = filepath
                         .replace(`/${clientPath}/app/`, '')
@@ -354,7 +353,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('serve', cb => {
-    runSequence(['clean:tmp', 'constant'],
+  runSequence(['clean:tmp', 'env:all'], ['constant'],
         ['lint:scripts', 'inject', 'jade'],
         ['wiredep:client'],
         ['transpile:client', 'styles'],
@@ -467,30 +466,30 @@ gulp.task('clean:dist', () => del([`${paths.dist}/!(.git*|.openshift|Procfile)**
 gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant'], () => {
     var manifest = gulp.src(`${paths.dist}/${clientPath}/assets/rev-manifest.json`);
 
-    var appFilter = plugins.filter('**/app.js');
-    var jsFilter = plugins.filter('**/*.js');
-    var cssFilter = plugins.filter('**/*.css');
-    var htmlBlock = plugins.filter(['**/*.!(html)']);
+    var appFilter = plugins.filter('**/app.js', {restore: true});
+    var jsFilter = plugins.filter('**/*.js', {restore: true});
+    var cssFilter = plugins.filter('**/*.css', {restore: true});
+    var htmlBlock = plugins.filter(['**/*.!(html)'], {restore: true});
 
     return gulp.src(paths.client.mainView)
         .pipe(plugins.useref())
             .pipe(appFilter)
                 .pipe(plugins.addSrc.append('.tmp/templates.js'))
                 .pipe(plugins.concat('app/app.js'))
-            .pipe(appFilter.restore())
+            .pipe(appFilter.restore)
             .pipe(jsFilter)
                 .pipe(plugins.ngAnnotate())
                 .pipe(plugins.uglify())
-            .pipe(jsFilter.restore())
+            .pipe(jsFilter.restore)
             .pipe(cssFilter)
                 .pipe(plugins.minifyCss({
                     cache: true,
                     processImportFrom: ['!fonts.googleapis.com']
                 }))
-            .pipe(cssFilter.restore())
+            .pipe(cssFilter.restore)
             .pipe(htmlBlock)
                 .pipe(plugins.rev())
-            .pipe(htmlBlock.restore())
+            .pipe(htmlBlock.restore)
         .pipe(plugins.revReplace({manifest}))
         .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
 });

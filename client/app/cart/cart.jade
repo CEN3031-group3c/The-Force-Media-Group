@@ -1,0 +1,55 @@
+navbar
+.container
+  .col-xs-6
+    div(ng-repeat="item in items track by $index").list-group
+      .list-group-item
+        table.cartItemTable
+          tr
+            td
+              .itemName
+                | {{item.Name}}
+              .itemDescription
+                | {{item.Description}}
+              .itemPrice
+                | {{item.Price}}
+            td
+              .itemPicture
+                img.img-responsive.center-block(ng-src="{{item.Picture}}")
+            td.removeButtontd
+              .removeButton.glyphicon.glyphicon-trash(title="remove item from cart" ng-click="confirmRemoveItem($index)")
+  .col-xs-6
+    .well.well-lg(style="padding-bottom: 30px")
+      h4
+        | Checkout Details
+
+      label
+        | Order total: {{orderTotal | currency:"USD $"}}
+      br
+      label
+        | Shipping Information
+      table
+        tr
+          td
+            | Name:
+          td
+            | Gavin Scheele
+        tr
+          td
+            | Address:
+          td
+            | 1234 Cupcake ln, Paris, France 32122
+
+      button.btn.btn-xs.btn-success.pull-right(ng-click="checkout()")
+        | checkout
+
+
+footer
+
+
+modal-dialog(show="showDialog" dialog-title="Are you sure?" height="150px" width="30%")
+  p
+    | Are you sure you want to remove this item from your cart?
+  button.btn.btn-xs.btn-default(ng-click="hideDialog()")
+    | Cancel
+  button.btn.btn-xs.btn-danger#removeItemButton(ng-click="removeItem()")
+    | Remove Item
