@@ -1,14 +1,9 @@
 (function(angular, undefined) {
-  angular.module("fmgApp.constants", [])
+'use strict';
 
-.constant("appConfig", {
-	"YouTubeKey": "AIzaSyCHtYjbNYLFs-B3tML3SmXGv0-fwaGAxuw",
-	"userRoles": [
-		"guest",
-		"user",
-		"admin"
-	]
-})
+angular.module('fmgApp.constants', [])
+
+.constant('appConfig', {YouTubeKey:'',userRoles:['guest','user','admin']})
 
 ;
 })(angular);
