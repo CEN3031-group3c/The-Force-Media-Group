@@ -84,12 +84,12 @@ describe('StoreItem API:', function() {
 
   });
 
-  describe('PUT /api/storeItems/:id', function() {
+  describe('PUT /api/storeItems/updateStoreItem/:id', function() {
     var updatedStoreItem;
 
     beforeEach(function(done) {
       request(app)
-        .put('/api/storeItems/' + newStoreItem._id)
+        .put('/api/storeItems/updateStoreItem/' + newStoreItem._id)
         .send({
           Name: "updated This is a new store item",
           Price: 19.98,

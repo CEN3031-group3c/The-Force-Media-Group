@@ -29,6 +29,10 @@ module.exports = function(config) {
       'client/bower_components/AngularJS-Toaster/toaster.js',
       'client/bower_components/ngModal/dist/ng-modal.js',
       'client/bower_components/moment/moment.js',
+      'client/bower_components/angular-aria/angular-aria.js',
+      'client/bower_components/angular-messages/angular-messages.js',
+      'client/bower_components/angular-material/angular-material.js',
+      'client/bower_components/angular-material-icons/angular-material-icons.min.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       'client/bower_components/livereload-js/dist/livereload.js',
       // endbower

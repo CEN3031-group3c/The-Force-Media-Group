@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/emails', require('./api/email'));
   app.use('/api/themeColors', require('./api/themeColor'));
   app.use('/api/comments', require('./api/comment'));
   app.use('/api/storeItems', require('./api/storeItem'));

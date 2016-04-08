@@ -2,29 +2,92 @@
 navbar
 .container
   .row
-    .col-lg-12.text-right
-      button.crestBackground.btn.btn-default.btn-lg#cart(class="glyphicon glyphicon-shopping-cart" ui-sref="cart({items: addedItems})")
+    .col-lg-12
+      div(ng-show="isAdmin")
+        md-button.md-raised(ng-click="addStoreItem()")
+          | Add New Item
+      .text-right
+          ng-md-icon(icon="add_shopping_cart" ui-sref="cart({items: addedItems})" title="Go to Cart").clickable.text-white
   .row
     div(ng-repeat="item in items")
       .col-lg-4.col-md-4.col-sm-5.col-xs-6
         .panel.panel-default
           .panel-body.text-center
-            img.img-responsive.center-block(ng-src="{{item.Picture}}" ng-click="seeItem($index)")
-            h4.row.text-center
-              | {{item.Name}}
-            h5.row.text-center.crestColor
-              |${{item.Price}}
+            div(ng-click="seeItem($index)")
+              img.img-responsive.center-block(ng-src="{{item.Picture}}" style="max-height:256px; max-width:256px")
+              h4.row.text-center(style="color:black")
+                | {{item.Name}}
+              h5.row.text-center.crestColor
+                |${{item.Price}}
             .row.text-center
-              button.crestBackground.btn.btn-default(ng-click="addToCart(item)")
+              md-button.md-raised(ng-click="addToCart(item)")
                 |Add to Cart
-footer.cloudyBackground
+footer
 
-modal-dialog(show="showDialog" height="55%" width="50%")
-  p
-    img.img-responsive.center-block(ng-src="{{selectedItem.Picture}}")
+modal-dialog#viewItem(show="showDialog" height="65%" width="50%" style="color:black;")
+  div(ng-show="isAdmin").col-xs-12
+    md-button.md-raised(ng-click="editItem()")
+      | Edit Item
+    md-button.md-raised(ng-click="deleteStoreItem()" style="margin-left: 8px")
+      | Delete Item
+  div(ng-hide="editingItem" style="margin-top:20px").col-xs-12
+    img.img-responsive.center-block(ng-src="{{selectedItem.Picture}}" style="max-height:256px; max-width:256px; margin-top:10px;")
     h4.row.text-center
       | {{selectedItem.Name}}
     h4.row.text-center
       |${{selectedItem.Price}}
     h4.row.text-center
       | {{selectedItem.Description}}
+
+  form(ng-if="editingItem").col-xs-12
+    .form-group
+      label(for="Name")
+        | Name
+      input#Name.form-control(ng-model="tmpItem.Name")
+
+      label(for="Picture")
+       | Picture
+      input#Picture.form-control(ng-model="tmpItem.Picture")
+      img.img-responsive.center-block(ng-src="{{tmpItem.Picture}}" style="max-height:256px; max-width:256px; margin-top:10px;")
+
+
+      label(for="Price")
+        | Price
+      input#Price.form-control(ng-model="tmpItem.Price")
+
+      label(for="Description")
+        | Description
+      input#Description.form-control(ng-model="tmpItem.Description")
+
+      md-button.md-raised(ng-click="undoEdit()")
+        | Undo Changes
+      md-button.md-raised(ng-click="saveEdit()")
+        | Save Item
+
+modal-dialog(show="showAddItemDialog" height="65%" width="40%" style="color:black;")
+  .container.col-xs-12(style="margin-top:20px")
+    .form-group.col-xs-12
+      label(for="addName")
+        | Name
+      input#addName.form-control(ng-model="newStoreItem.Name" placeholder="Item Name")
+
+      label(for="addPicture")
+        | Picture Url
+      input#addPicture.form-control(ng-model="newStoreItem.Picture" placeholder="Picture Url")
+      img.img-responsive.center-block(ng-src="{{newStoreItem.Picture}}" ng-show="newStoreItem.Picture" style="max-height:256px;max-width:256px; margin-top: 10px;")
+
+      label(for="addPrice")
+        | Price
+      input#addPrice.form-control(ng-model="newStoreItem.Price" ui-money-mask="2" placeholder="$19.99")
+
+      label(for="addDescription")
+        | Description
+      input#addDescription.form-control(ng-model="newStoreItem.Description" placeholder="Description")
+
+      br
+      md-button.md-raised(ng-click="saveStoreItem()")
+        | Save Item
+
+
+
+

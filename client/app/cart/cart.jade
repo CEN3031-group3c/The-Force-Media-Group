@@ -1,46 +1,151 @@
 navbar
 .container
   .col-xs-6
-    div(ng-repeat="item in items track by $index").list-group
+    div(ng-repeat="item in items track by $index" ng-show="!checkingOut").list-group
       .list-group-item
         table.cartItemTable
           tr
-            td
+            td(style="width:120px")
+              .itemPicture
+                img.img-responsive.center-block(ng-src="{{item.Picture}}" style="max-height:100px; max-width:100px;")
+            td(style="color:black")
               .itemName
                 | {{item.Name}}
               .itemDescription
                 | {{item.Description}}
               .itemPrice
-                | {{item.Price}}
-            td
-              .itemPicture
-                img.img-responsive.center-block(ng-src="{{item.Picture}}")
+                | {{item.Price | currency:"$"}}
+
+              label(for="quantity")
+                | Quantity
+              input#quantity.form-control(ng-model="item.Quantity" type="number")
             td.removeButtontd
               .removeButton.glyphicon.glyphicon-trash(title="remove item from cart" ng-click="confirmRemoveItem($index)")
+
+    div(ng-show="checkingOut")
+      .well.well-lg(style="padding-bottom: 30px; color:black")
+        md-button.md-raised(ng-click="changeAddress()")
+          | Change Shipping Information
+        h4
+          | Order Details
+
+        label
+          | Order total: {{orderTotal | currency:"USD $"}}
+        br
+        h3
+          | Shipping Information
+        form(style="color:black")
+          .form-group
+            label(for="fullNameDisabled")
+              | Full Name:
+            input#fullNameDisabled.form-control(ng-model="shippingInfo.fullName" disabled)
+
+            label(for="address1Disabled")
+              | Address Line 1:
+            input#address1Disabled.form-control(ng-model="shippingInfo.address1" disabled)
+
+            label(for="address2Disabled")
+              | Address Line 2:
+            input#address2Disabled.form-control(ng-model="shippingInfo.address2" disabled)
+
+            label(for="cityDisabled")
+              | City:
+            input#cityDisabled.form-control(ng-model="shippingInfo.city" disabled)
+
+            label(for="stateDisabled")
+              | State:
+            input#stateDisabled.form-control(ng-model="shippingInfo.state" disabled)
+
+            label(for="zipDisabled")
+              | Zip Code:
+            input#zipDisabled.form-control(ng-model="shippingInfo.zip" disabled)
+
+            label(for="countryDisabled")
+              | Country:
+            input#countryDisabled.form-control(value="United States" disabled)
+
+
+        button.btn.btn-xs.btn-success.pull-right(ng-click="checkout()")
+          | checkout
+
   .col-xs-6
-    .well.well-lg(style="padding-bottom: 30px")
-      h4
-        | Checkout Details
+    div(ng-show="!checkingOut")
+      .well.well-lg(style="padding-bottom: 30px; color:black")
+        h4
+          | Order Details
 
-      label
-        | Order total: {{orderTotal | currency:"USD $"}}
-      br
-      label
-        | Shipping Information
-      table
-        tr
-          td
-            | Name:
-          td
-            | Gavin Scheele
-        tr
-          td
-            | Address:
-          td
-            | 1234 Cupcake ln, Paris, France 32122
+        label
+          | Order total: {{orderTotal | currency:"USD $"}}
+        br
+        h3
+          | Shipping Information
+        form(style="color:black")
+          .form-group
+            label(for="fullName")
+              | Full Name:
+            input#fullName.form-control(ng-model="shippingInfo.fullName")
 
-      button.btn.btn-xs.btn-success.pull-right(ng-click="checkout()")
-        | checkout
+            label(for="address1")
+              | Address Line 1:
+            input#address1.form-control(ng-model="shippingInfo.address1")
+
+            label(for="address2")
+              | Address Line 2:
+            input#address2.form-control(ng-model="shippingInfo.address2")
+
+            label(for="city")
+              | City:
+            input#city.form-control(ng-model="shippingInfo.city")
+
+            label(for="state")
+              | State:
+            input#state.form-control(ng-model="shippingInfo.state")
+
+            label(for="zip")
+              | Zip Code:
+            input#zip.form-control(ng-model="shippingInfo.zip")
+
+            label(for="country")
+              | Country:
+            label#country.form-control
+              | United States
+
+
+        button.btn.btn-xs.btn-success.pull-right(ng-click="checkout()")
+          | checkout
+
+    div(ng-show="checkingOut")
+      .well.well-lg(style="padding-bottom: 30px; color:black")
+        label(style="color:red; font-weight: 400")
+          | *Please verify that your shipping address is correct before clicking "Make Order"
+        br
+
+        h3
+          | Credit/Debit Card Information
+
+        label(for="cardNumber")
+          | Card Number:
+        input#cardNumber.form-control(ng-model="card.number")
+
+        label(for="expMonth")
+          | Expiration Month:
+        input#expMonth.form-control(ng-model="card.exp_month")
+
+        label(for="expYear")
+          | Expiration Year:
+        input#expYear.form-control(ng-model="card.exp_year")
+
+        label(for="cvv")
+          | CVV:
+        input#cvv.form-control(ng-model="card.cvv")
+
+        br
+        label
+          | Transactions powered by Stripe, Inc.
+
+        button.btn.btn-xs.btn-success.pull-right(ng-click="submitPayment()" style="margin-top:10px")
+          | Make Order
+
 
 
 footer

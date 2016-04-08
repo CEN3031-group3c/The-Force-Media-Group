@@ -33,7 +33,7 @@ class NavbarController {
 
   }
 
-  startLoading(event) {
+  startLoading() {
     console.log('start');
     $('.loader-icon').removeClass('shrinking-cog').addClass('growing-cog');
     setTimeout(function() {
@@ -41,7 +41,7 @@ class NavbarController {
     }, 100);
   }
 
-  stopLoading(event) {
+  stopLoading() {
     console.log('stop');
     $('.loader-icon').removeClass('growing-cog').addClass('shrinking-cog');
   }

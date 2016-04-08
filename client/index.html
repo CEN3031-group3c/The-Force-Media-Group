@@ -11,11 +11,14 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css" />
       <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
       <link rel="stylesheet" href="bower_components/ngModal/dist/ng-modal.css" />
+      <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+      <link rel="stylesheet" href="bower_components/angular-material-icons/angular-material-icons.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -30,8 +33,10 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Add your site or application content here -->
-    <div ui-view=""></div>
-    <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
+    <md-content>
+      <div ui-view=""></div>
+      <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
+    </md-content>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -44,7 +49,7 @@
       ga('create', 'UA-XXXXX-X');
       ga('send', 'pageview');
     </script>
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -69,6 +74,10 @@
       <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
       <script src="bower_components/ngModal/dist/ng-modal.js"></script>
       <script src="bower_components/moment/moment.js"></script>
+      <script src="bower_components/angular-aria/angular-aria.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.js"></script>
+      <script src="bower_components/angular-material/angular-material.js"></script>
+      <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
@@ -77,7 +86,7 @@
       <script src="app/admin/admin.module.js"></script>
       <script src="components/auth/auth.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="app/store/store.controller.js"></script>
+      <script src="app/main/main.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/account/account.js"></script>
       <script src="app/admin/admin.router.js"></script>
@@ -93,11 +102,12 @@
       <script src="app/cart/cart.js"></script>
       <script src="app/colorService/colorService.service.js"></script>
       <script src="app/commentService/comment.service.js"></script>
+      <script src="app/email/email.service.js"></script>
       <script src="app/main/main.controller.js"></script>
-      <script src="app/main/main.js"></script>
       <script src="app/account/login/login.controller.js"></script>
+      <script src="app/store/store.controller.js"></script>
       <script src="app/store/store.js"></script>
-      <script src="app/store/store.service.js"></script>
+      <script src="app/storeService/storeService.service.js"></script>
       <script src="app/textSignUp/textSignUp.directive.js"></script>
       <script src="app/textSignUp/textSignUp.factory.js"></script>
       <script src="app/youtube/youtube.directive.js"></script>
