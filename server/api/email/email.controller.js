@@ -15,6 +15,7 @@ var nodemailer = require('nodemailer');
 var xoauth2 = require('xoauth2');
 var smtpTransport = require('nodemailer-smtp-transport');
 
+//This allows gmail to authorize the client to send emails even when the gmail account is not logged in
 var generator = xoauth2.createXOAuth2Generator({
   user: 'forcemediagroupdb@gmail.com',
   clientId: '1049619144734-pqo3hkf4dr5eomguc3c69opnsbcaasd4.apps.googleusercontent.com',
@@ -46,6 +47,7 @@ function respondWithResult(res, statusCode) {
 
 // send mail
 
+//Takes values from the booking controller
 export function sendEmail(req, res){
   console.log(req.body);
   transporter.sendMail({

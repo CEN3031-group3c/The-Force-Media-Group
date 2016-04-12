@@ -2,6 +2,10 @@
   margin: 20px 0;
 }
 
+p {
+  color: #FFF;
+}
+
 #banner {
   border-bottom: none;
   margin-top: -20px;

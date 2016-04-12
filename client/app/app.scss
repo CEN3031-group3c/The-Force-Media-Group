@@ -3,10 +3,17 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 @import '../bower_components/bootstrap-social/bootstrap-social.scss';
 $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../bower_components/font-awesome/scss/font-awesome';
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,700,800);
 
 /**
  * App-wide Styles
  */
+
+#navbar {
+  height: 40px;
+  //font-family: 'Raleway', sans-serif;
+  //font-weight: 700;
+}
 
 .stretch {
   width: 100%;
