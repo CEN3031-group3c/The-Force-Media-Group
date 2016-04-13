@@ -21,11 +21,12 @@ class SignupController {
         email: this.user.email,
         password: this.user.password
       })
-      .then(() => {
+      .then( () => {
         // Account created, redirect to home
         this.$state.go('main');
       })
-      .catch(err => {
+      .catch( err => {
+        console.error(err);
         err = err.data;
         this.errors = {};
 

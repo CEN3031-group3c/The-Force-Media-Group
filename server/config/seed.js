@@ -6,9 +6,9 @@
 'use strict';
 import User from '../api/user/user.model';
 
-User.find({}).removeAsync()
+User.find({}).remove()
   .then(() => {
-    User.createAsync({
+    User.create({
       provider: 'local',
       name: 'Test User',
       email: 'test@example.com',

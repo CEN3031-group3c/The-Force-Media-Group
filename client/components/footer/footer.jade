@@ -1,30 +1,29 @@
-.footer.cloudyBackground
-  .container
-    .footer
-      .row
-        .col-xs-12.col-sm-6.col-md-6
-          .h4 Contact Jarmone
-            .h5 Phone Number
-            .h5 Email Address
+.footer
+  .container-fluid
+    .row
+      .col-xs-12
+        hr
+      .col-xs-12.col-sm-6.col-md-6
+        .h4 Contact Jarmone
+          .h5 Phone Number
+          .h5 Email Address
 
-        .col-xs-12.col-sm-6.col-md-6
-          .h4 Follow Jarmone
-            #socialMediaIcons
-              a(href="https://www.facebook.com/JarmoneDavisMedia")
-                img(src="../assets/images/facebook_circle.png").socialMediaIcon.clickable
-
-              a(href="https://www.youtube.com/channel/UCBWT4QoCrNRuH54uhL4-B3Q")
-                img(src="../assets/images/youtube_circle.png").socialMediaIcon.clickable
-
-              a(href="http://www.twitter.com")
-                img(src="../assets/images/twitter_circle.png").socialMediaIcon.clickable
-
-              a(href="https://www.linkedin.com")
-                img(src="../assets/images/linkdin_circle.png").socialMediaIcon.clickable
-
-        .col-xs-12
-          text-sign-up
+      .col-xs-12.col-sm-6.col-md-6
+        .h4 Follow Jarmone
+          #socialMediaIcons
+            md-button.md-fab.md-primary(href="https://www.facebook.com/JarmoneDavisMedia" target="_blank" aria-label="Facebook link")
+              ng-md-icon(icon="facebook").clickable.text-white
+            md-button.md-fab.md-primary(href="https://www.youtube.com/channel/UCBWT4QoCrNRuH54uhL4-B3Q" target="_blank" aria-label="YouTube link")
+              ng-md-icon(icon="google-plus").text-white.clickable
+            md-button.md-fab.md-primary(href="http://www.twitter.com" target="_blank" aria-label="Twitter link")
+              ng-md-icon(icon="twitter" ).clickable.text-white
+            md-button.md-fab.md-primary(href="https://www.linkedin.com" target="_blank" aria-label="Linkedin link")
+              ng-md-icon(icon="linkedin").clickable.text-white
+    .row
+      .col-xs-12
+        hr
+      .col-xs-4
+      .col-xs-4.md-whiteframe-1dp
+        text-sign-up
+      .col-xs-4
   p &copy; 2016 Force Media Group
-
-
-// img(src='../assets/images/filler_Logo.jpg' alt='Jarmone Davis Media' height='50px')

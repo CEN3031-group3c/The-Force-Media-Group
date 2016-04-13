@@ -1,7 +1,7 @@
 'use strict';
 
 var config = browser.params;
-var UserModel = require(config.serverConfig.root + '/server/api/user/user.model');
+var UserModel = require(config.serverConfig.root + '/server/api/user/user.model').default;
 
 describe('Signup View', function() {
   var page;
@@ -36,22 +36,22 @@ describe('Signup View', function() {
     expect(page.form.confirmPassword.getAttribute('type')).toBe('password');
     expect(page.form.confirmPassword.getAttribute('name')).toBe('confirmPassword');
     expect(page.form.submit.getAttribute('type')).toBe('submit');
-    expect(page.form.submit.getText()).toBe('Sign up');
+    expect(page.form.submit.getText()).toBe('SIGN UP');
   });
 
   it('should include oauth buttons with correct classes applied', function() {
-    expect(page.form.oauthButtons.facebook.getText()).toBe('Connect with Facebook');
-    expect(page.form.oauthButtons.facebook.getAttribute('class')).toMatch('btn-block');
-    expect(page.form.oauthButtons.google.getText()).toBe('Connect with Google+');
-    expect(page.form.oauthButtons.google.getAttribute('class')).toMatch('btn-block');
-    expect(page.form.oauthButtons.twitter.getText()).toBe('Connect with Twitter');
-    expect(page.form.oauthButtons.twitter.getAttribute('class')).toMatch('btn-block');
+    //expect(page.form.oauthButtons.facebook.getText()).toBe('Connect with Facebook');
+    //expect(page.form.oauthButtons.facebook.getAttribute('class')).toMatch('btn-block');
+    expect(page.form.oauthButtons.google.getText()).toBe('CONNECT WITH GOOGLE+');
+    expect(page.form.oauthButtons.google.getAttribute('class')).toMatch('md-raised');
+    //expect(page.form.oauthButtons.twitter.getText()).toBe('Connect with Twitter');
+    //expect(page.form.oauthButtons.twitter.getAttribute('class')).toMatch('btn-block');
   });
 
   describe('with local auth', function() {
 
     beforeAll(function(done) {
-      UserModel.removeAsync().then(done);
+      UserModel.remove().then(done);
     });
 
     it('should signup a new user, log them in, and redirecting to "/"', function() {

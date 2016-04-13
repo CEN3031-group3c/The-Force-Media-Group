@@ -2,7 +2,7 @@
 
 angular.module('fmgApp')
   .service('commentService', function ($http) {
-    var baseUrl = "/api/comments/";
+    var baseUrl = '/api/comments/';
 
     var methods = {
       getAllComments: function(){

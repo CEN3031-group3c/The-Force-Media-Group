@@ -1,3 +1,33 @@
 navbar
-
+.container
+  form(ng-submit="submit()")
+  .row
+    .col-xs-12.col-lg-6.col-md-6 
+      md-input-container.booking-stretch
+        label(for="Name") Name/Organization *
+        input(type="text", name="Name", ng-model="propName")
+    .col-xs-12.col-lg-6.col-md-6
+      md-input-container.booking-stretch
+        label(for="Email") Contact Email *
+        input(type="email", name="Email", ng-model="email")
+    .col-xs-12.col-lg-6.col-md-6
+      md-input-container.booking-stretch
+        label(for="Phone") Contact Phone *
+        input(type="tel", name="Phone", ng-model="phoneNum")
+    .col-xs-12.col-lg-6.col-md-6
+      md-input-container.booking-stretch
+        label(for="Date") Event MM/DD/YYYY HH:MM PM/AM *
+        input(type="datetime-local", name="Date", ng-model="eventDate")
+    .col-xs-12.col-lg-6.col-md-6
+      md-input-container.booking-stretch
+        label(for="Type") Type of Event *
+        md-select(name="Type", ng-model="eventType")
+          md-option(value="Speaking") Speaking
+          md-option(value="Music") Music
+    .col-xs-12.col-lg-6.col-md-6
+      md-input-container.booking-stretch
+        label(for="Description") Event Description *
+        textarea(name="Description", rows="3", ng-model="descript")
+    .col-xs-12.col-lg-12.col-md-12.text-center
+      md-button.md-raised(type="submit") Submit
 footer

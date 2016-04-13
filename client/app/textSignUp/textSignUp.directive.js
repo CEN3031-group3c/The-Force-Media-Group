@@ -5,7 +5,7 @@ angular.module('fmgApp')
     return {
       templateUrl: 'app/textSignUp/textSignUp.html',
       restrict: 'EA',
-      link: function (scope, element, attrs) {
+      link: function (scope) {
 
         scope.createContact = function() {
           scope.$broadcast('startLoading');
@@ -27,7 +27,9 @@ angular.module('fmgApp')
             scope.phoneNumber = undefined;
           });
 
-        }
+        };
+
       }
-    }
+    };
+    
   });

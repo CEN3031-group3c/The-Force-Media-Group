@@ -24,8 +24,8 @@ function respondWithResult(res, statusCode) {
 function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
-    return updated.saveAsync()
-      .spread(updated => {
+    return updated.save()
+      .then(updated => {
         return updated;
       });
   };
@@ -34,7 +34,7 @@ function saveUpdates(updates) {
 function removeEntity(res) {
   return function(entity) {
     if (entity) {
-      return entity.removeAsync()
+      return entity.remove()
         .then(() => {
           res.status(204).end();
         });
@@ -61,14 +61,14 @@ function handleError(res, statusCode) {
 
 // Gets a list of ThemeColors
 export function index(req, res) {
-  ThemeColor.findAsync()
+  ThemeColor.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a single ThemeColor from the DB
 export function show(req, res) {
-  ThemeColor.findByIdAsync(req.params.id)
+  ThemeColor.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -76,17 +76,14 @@ export function show(req, res) {
 
 // Creates a new ThemeColor in the DB
 export function create(req, res) {
-  ThemeColor.createAsync(req.body)
+  ThemeColor.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
 // Updates an existing ThemeColor in the DB
 export function update(req, res) {
-    if (req.body._id) {
-      delete req.body._id;
-    }
-    ThemeColor.findByIdAsync(req.params.id)
+    ThemeColor.findById(req.params.id).exec()
       .then(handleEntityNotFound(res))
       .then(saveUpdates(req.body))
       .then(respondWithResult(res))
@@ -96,7 +93,7 @@ export function update(req, res) {
 
 // Deletes a ThemeColor from the DB
 export function destroy(req, res) {
-  ThemeColor.findByIdAsync(req.params.id)
+  ThemeColor.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

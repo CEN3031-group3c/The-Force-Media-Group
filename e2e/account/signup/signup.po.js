@@ -11,7 +11,7 @@ var SignupPage = function() {
   form.email = form.element(by.model('vm.user.email'));
   form.password = form.element(by.model('vm.user.password'));
   form.confirmPassword = form.element(by.model('vm.user.confirmPassword'));
-  form.submit = form.element(by.css('.btn-register'));
+  form.submit = form.element(by.css('#signup'));
   form.oauthButtons = require('../../components/oauth-buttons/oauth-buttons.po').oauthButtons;
 
   this.signup = function(data) {
@@ -27,4 +27,3 @@ var SignupPage = function() {
 };
 
 module.exports = new SignupPage();
-

@@ -190,4 +190,31 @@ describe('Blog API:', function() {
 
   });
 
+  describe('GET /api/blogs/:id HANDLE ERROR', function() {
+    var blog;
+
+    beforeEach(function(done) {
+      request(app)
+        .get('/api/blogs/' + 'ThisShouldNeverBeAnID')
+        .expect(500)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          blog = res.error;
+          done();
+        });
+    });
+
+    afterEach(function() {
+      blog = {};
+    });
+
+    it('should respond with the error', function() {
+      blog.text.should.equal('{"message":"Cast to ObjectId failed for value \\"ThisShouldNeverBeAnID\\" at path \\"_id\\"","name":"CastError","kind":"ObjectId","value":"ThisShouldNeverBeAnID","path":"_id"}');
+    });
+
+  });
+
 });

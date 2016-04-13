@@ -6,10 +6,8 @@
 'use strict';
 
 var MainPage = function() {
-  this.heroEl = element(by.css('.hero-unit'));
-  this.h1El = this.heroEl.element(by.css('h1'));
-  this.imgEl = this.heroEl.element(by.css('img'));
+  this.youtubePlayer = element(by.css('#youtube-player'));
+  this.imgHeadshot = element(by.css('#img-headshot'));
 };
 
 module.exports = new MainPage();
-

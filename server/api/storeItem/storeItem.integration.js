@@ -84,12 +84,12 @@ describe('StoreItem API:', function() {
 
   });
 
-  describe('PUT /api/storeItems/:id', function() {
+  describe('PUT /api/storeItems/updateStoreItem/:id', function() {
     var updatedStoreItem;
 
     beforeEach(function(done) {
       request(app)
-        .put('/api/storeItems/' + newStoreItem._id)
+        .put('/api/storeItems/updateStoreItem/' + newStoreItem._id)
         .send({
           Name: "updated This is a new store item",
           Price: 19.98,
@@ -140,6 +140,33 @@ describe('StoreItem API:', function() {
           }
           done();
         });
+    });
+
+  });
+
+  describe('GET /api/storeItems/:id HANDLE ERROR', function() {
+    var storeItem;
+
+    beforeEach(function(done) {
+      request(app)
+        .get('/api/storeItems/' + 'ThisShouldNeverBeAnID')
+        .expect(500)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          storeItem = res.error;
+          done();
+        });
+    });
+
+    afterEach(function() {
+      storeItem = {};
+    });
+
+    it('should respond with the error', function() {
+      storeItem.text.should.equal('{"message":"Cast to ObjectId failed for value \\"ThisShouldNeverBeAnID\\" at path \\"_id\\"","name":"CastError","kind":"ObjectId","value":"ThisShouldNeverBeAnID","path":"_id"}');
     });
 
   });

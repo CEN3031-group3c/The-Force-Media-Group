@@ -5,7 +5,7 @@ angular.module('fmgApp')
     return {
       templateUrl: 'components/footer/footer.html',
       restrict: 'E',
-      link: function(scope, element) {
+      link: function() {
       }
     };
   });

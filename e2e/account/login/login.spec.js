@@ -1,7 +1,7 @@
 'use strict';
 
 var config = browser.params;
-var UserModel = require(config.serverConfig.root + '/server/api/user/user.model');
+var UserModel = require(config.serverConfig.root + '/server/api/user/user.model').default;
 
 describe('Login View', function() {
   var page;
@@ -18,19 +18,18 @@ describe('Login View', function() {
   };
 
   beforeEach(function(done) {
-    UserModel.removeAsync()
+    UserModel.remove()
       .then(function() {
-        return UserModel.createAsync(testUser);
+        return UserModel.create(testUser)
       })
       .then(loadPage)
-      .finally(function() {
+      .then(function() {
         browser.wait(function() {
           //console.log('waiting for angular...');
           return browser.executeScript('return !!window.angular');
-
-        }, 5000).then(done);
-
-      });
+        }, 2000);
+      })
+      .then(done);
   });
 
   it('should include login form with correct inputs and submit button', function() {
@@ -39,16 +38,16 @@ describe('Login View', function() {
     expect(page.form.password.getAttribute('type')).toBe('password');
     expect(page.form.password.getAttribute('name')).toBe('password');
     expect(page.form.submit.getAttribute('type')).toBe('submit');
-    expect(page.form.submit.getText()).toBe('Login');
+    expect(page.form.submit.getText()).toBe('LOGIN');
   });
 
   it('should include oauth buttons with correct classes applied', function() {
-    expect(page.form.oauthButtons.facebook.getText()).toBe('Connect with Facebook');
-    expect(page.form.oauthButtons.facebook.getAttribute('class')).toMatch('btn-block');
-    expect(page.form.oauthButtons.google.getText()).toBe('Connect with Google+');
-    expect(page.form.oauthButtons.google.getAttribute('class')).toMatch('btn-block');
-    expect(page.form.oauthButtons.twitter.getText()).toBe('Connect with Twitter');
-    expect(page.form.oauthButtons.twitter.getAttribute('class')).toMatch('btn-block');
+    //expect(page.form.oauthButtons.facebook.getText()).toBe('Connect with Facebook');
+    //expect(page.form.oauthButtons.facebook.getAttribute('class')).toMatch('btn-block');
+    expect(page.form.oauthButtons.google.getText()).toBe('CONNECT WITH GOOGLE+');
+    expect(page.form.oauthButtons.google.getAttribute('class')).toMatch('md-raised');
+    //expect(page.form.oauthButtons.twitter.getText()).toBe('Connect with Twitter');
+    //expect(page.form.oauthButtons.twitter.getAttribute('class')).toMatch('btn-block');
   });
 
   describe('with local auth', function() {

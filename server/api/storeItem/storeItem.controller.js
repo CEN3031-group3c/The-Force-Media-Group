@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import StoreItem from './storeItem.model';
+var shippo = require('shippo')('d0120ed2ca350acbcc430b07c2fa703641912098');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -24,8 +25,8 @@ function respondWithResult(res, statusCode) {
 function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
-    return updated.saveAsync()
-      .spread(updated => {
+    return updated.save()
+      .then(updated => {
         return updated;
       });
   };
@@ -34,7 +35,7 @@ function saveUpdates(updates) {
 function removeEntity(res) {
   return function(entity) {
     if (entity) {
-      return entity.removeAsync()
+      return entity.remove()
         .then(() => {
           res.status(204).end();
         });
@@ -61,7 +62,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of StoreItems
 export function index(req, res) {
-  StoreItem.find(req.params)
+  StoreItem.find(req.params).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -77,7 +78,7 @@ export function index(req, res) {
 
 // Gets a single StoreItem from the DB
 export function show(req, res) {
-  StoreItem.findByIdAsync(req.params.id)
+  StoreItem.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -92,9 +93,6 @@ export function create(req, res) {
 
 // Updates an existing StoreItem in the DB
 export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
   return StoreItem.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
@@ -108,4 +106,76 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+
+export function createCharge(req, res) {
+  // setup stripe with test API key
+  var stripe = require("stripe")(
+    "sk_test_IwZeKVydQnhNLuhUlWddgIZf"
+  );
+
+  // create charge using stripe module
+  return stripe.charges.create({
+    amount: req.body.amount,
+    currency: "usd",
+    card: {
+      number: req.body.card.number,
+      exp_month: req.body.card.exp_month,
+      exp_year: req.body.card.exp_year,
+      cvc: req.body.card.cvv
+    },
+    description: req.body.description
+  }, function(err, charge) {
+    if (err) {
+      // bad things
+      res.json(err);
+    } else {
+      // successful charge
+      res.json(charge);
+    }
+  });
+
+
+
+}
+
+export function validateAddress(req, res) {
+  if(req.body.address2 !== null) {
+    shippo.address.create({
+      "object_purpose": "QUOTE",
+      "name": req.body.fullName,
+      "street1": req.body.address1,
+      "city": req.body.city,
+      "state": req.body.state,
+      "zip": req.body.zip,
+      "country": "US",
+      "validate": true
+    }, function (err, shippo) {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(shippo);
+      }
+    });
+  }
+  else {
+    shippo.address.create({
+      "object_purpose":"QUOTE",
+      "name": req.body.fullName,
+      "street1": req.body.address1,
+      "street2": req.body.address2,
+      "city": req.body.city,
+      "state": req.body.state,
+      "zip": req.body.zip,
+      "country":" US",
+      "validate": true
+    }, function(err, shippo) {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(shippo);
+      }
+    });
+  }
 }

@@ -144,4 +144,30 @@ describe('ThemeColor API:', function() {
 
   });
 
+  describe('GET /api/themeColors/:id HANDLE ERROR', function() {
+    var themeColor;
+
+    beforeEach(function(done) {
+      request(app)
+        .get('/api/themeColors/' + 'ThisShouldNeverBeAnID')
+        .expect(500)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          themeColor = res.error;
+          done();
+        });
+    });
+
+    afterEach(function() {
+      themeColor = {};
+    });
+
+    it('should respond with the error', function() {
+      themeColor.text.should.equal('{"message":"Cast to ObjectId failed for value \\"ThisShouldNeverBeAnID\\" at path \\"_id\\"","name":"CastError","kind":"ObjectId","value":"ThisShouldNeverBeAnID","path":"_id"}');
+    });
+  });
+
 });

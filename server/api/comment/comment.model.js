@@ -1,6 +1,6 @@
 'use strict';
 
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+import mongoose from 'mongoose';
 
 var CommentSchema = new mongoose.Schema({
   userId: String,

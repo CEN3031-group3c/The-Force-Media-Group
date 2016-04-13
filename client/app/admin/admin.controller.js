@@ -9,9 +9,9 @@ angular.module('fmgApp.admin')
 
     $scope.sendText = function(textBody) {
       if (textBody) {
-        signUpService.sendTextToGroup(textBody).success(function (data) {
+        signUpService.sendTextToGroup(textBody).success(function() {
           $scope.dialogVisible = false;
-          toaster.pop("success", "Text message sent!");
+          toaster.pop('success', 'Text message sent!');
         });
       }
     };
@@ -39,20 +39,20 @@ angular.module('fmgApp.admin')
                 $scope.customColors = response.data;
                 var colors = response.data;
 
-                $('.deepSeaBackground').css({"background-color": colors[0].colorCode});
-                $('.deepSeaColor').css({"color": colors[0].colorCode});
+                $('.deepSeaBackground').css({'background-color': colors[0].colorCode});
+                $('.deepSeaColor').css({'color': colors[0].colorCode});
 
-                $('.skyBlueBackground').css({"background-color": colors[1].colorCode});
-                $('.skyBlueColor').css({"color": colors[1].colorCode});
+                $('.skyBlueBackground').css({'background-color': colors[1].colorCode});
+                $('.skyBlueColor').css({'color': colors[1].colorCode});
 
-                $('.crestBackground').css({"background-color": colors[2].colorCode});
-                $('.crestColor').css({"color": colors[2].colorCode});
+                $('.crestBackground').css({'background-color': colors[2].colorCode});
+                $('.crestColor').css({'color': colors[2].colorCode});
 
-                $('.sadDayBackground').css({"background-color": colors[3].colorCode});
-                $('.sadDayColor').css({"color": colors[3].colorCode});
+                $('.sadDayBackground').css({'background-color': colors[3].colorCode});
+                $('.sadDayColor').css({'color': colors[3].colorCode});
 
-                $('.cloudyBackground').css({"background-color": colors[4].colorCode});
-                $('.cloudyColor').css({"color": colors[4].colorCode});
+                $('.cloudyBackground').css({'background-color': colors[4].colorCode});
+                $('.cloudyColor').css({'color': colors[4].colorCode});
 
                 console.log(response.data);
               }).catch(function(err) {
@@ -61,7 +61,7 @@ angular.module('fmgApp.admin')
 
           }).catch(function(err) {
             console.log(err);
-          })
+          });
       });
 
     };
@@ -75,8 +75,8 @@ angular.module('fmgApp.admin')
 
       var hexCode = $scope.color.text;
 
-      if (hexCode === "") {
-        toaster.pop("error","Please enter text.");
+      if (hexCode === '') {
+        toaster.pop('error','Please enter text.');
         return;
       }
 
@@ -87,8 +87,8 @@ angular.module('fmgApp.admin')
       colorService.createColor(colorToCreate)
         .then(function (response) {
           var color = response.data;
-          toaster.pop("success","Color submitted");
-          $scope.color.text = "";
+          toaster.pop('success','Color submitted');
+          $scope.color.text = '';
           console.log(color);
           $scope.themeColors.push(color);
         }).catch(function(err){

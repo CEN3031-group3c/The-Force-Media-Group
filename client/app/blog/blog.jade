@@ -12,21 +12,20 @@ div(ng-show="viewAll")
                 label Body
                 textarea.form-control(lines="5" ng-model="blogpost.body")
                 div(class="btn-group")
-                    button.btn.btn-default(type="submit" data-toggle="tooltip" title="Load draft" ng-click="loadDraft()")
-                        span(class="glyphicon glyphicon-floppy-open")
                     button.btn.btn-default(type="submit" data-toggle="tooltip" title="Save draft" ng-click="saveDraft()")
                         span(class="glyphicon glyphicon-floppy-save")
                     button.btn.btn-default(type="submit" data-toggle="tooltip" title="Publish" ng-click="createPost()")
                         span(class="glyphicon glyphicon-plus")
 
-        ul(class="list-group" ng-repeat="blog in blogs | orderBy: 'updatedAt':true | limitTo: limit")
-            li(class="list-group-item" ng-show="blog.published")
+        ul(class="list-group" ng-repeat="blog in blogs | orderBy:'':true | limitTo: limit")
+            li(class="list-group-item" ng-show="blog.published || isAdmin")
                 div
                     div(class="btn-group" style="float:right")
-                        button.btn.btn-default
-                            span(class="glyphicon glyphicon-comment")  0
+                        button.btn.btn-default(ng-click="toggleView(blog)") {{numComments(blog)}} 
+                            span(class="glyphicon glyphicon-comment")
                         button.btn.btn-default(ng-show="isAdmin" ng-click="deletePost(blog)" data-toggle="tooltip" title="Delete")
                             span(class="glyphicon glyphicon-trash")
+                        md-checkbox.md-primary(aria-label="Checkbox" ng-model="blog.published" ng-show="isAdmin" ng-click="togglePublished(blog)")
                     h3(class="list-group-item-heading" href="#" ng-click="toggleView(blog)")
                         a(href="#") {{blog.title}}
                     h6 {{blog.updatedAt}}

@@ -1,7 +1,7 @@
 'use strict';
 
 var config = browser.params;
-var UserModel = require(config.serverConfig.root + '/server/api/user/user.model');
+var UserModel = require(config.serverConfig.root + '/server/api/user/user.model').default;
 
 describe('Logout View', function() {
   var login = function(user) {
@@ -16,18 +16,19 @@ describe('Logout View', function() {
   };
 
   beforeEach(function(done) {
-    UserModel.removeAsync()
+    UserModel.remove()
       .then(function() {
-        return UserModel.createAsync(testUser);
+        return UserModel.create(testUser);
       })
       .then(function() {
         return login(testUser);
       })
-      .finally(function() {
+      .then(function() {
         browser.wait(function() {
             return browser.executeScript('return !!window.angular');
-        }, 5000).then(done);
-      });
+        }, 2000);
+      })
+      .then(done);
   });
 
   describe('with local auth', function() {

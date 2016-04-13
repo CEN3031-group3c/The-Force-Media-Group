@@ -189,4 +189,31 @@ describe('Comment API:', function() {
 
   });
 
+  describe('GET /api/comments/:id HANDLE ERROR', function() {
+    var comment;
+
+    beforeEach(function(done) {
+      request(app)
+        .get('/api/comments/' + 'ThisShouldNeverBeAnID')
+        .expect(500)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          comment = res.error;
+          done();
+        });
+    });
+
+    afterEach(function() {
+      comment = {};
+    });
+
+    it('should respond with the error', function() {
+      comment.text.should.equal('{"message":"Cast to ObjectId failed for value \\"ThisShouldNeverBeAnID\\" at path \\"_id\\"","name":"CastError","kind":"ObjectId","value":"ThisShouldNeverBeAnID","path":"_id"}');
+    });
+
+  });
+
 });

@@ -64,11 +64,11 @@ describe('StoreItem API Router:', function() {
 
   });
 
-  describe('PUT /api/storeItems/:id', function() {
+  describe('PUT /api/storeItems/updateStoreItem/:id', function() {
 
     it('should route to storeItem.controller.update', function() {
       routerStub.put
-        .withArgs('/:id', 'storeItemCtrl.update')
+        .withArgs('/updateStoreItem/:id', 'storeItemCtrl.update')
         .should.have.been.calledOnce;
     });
 

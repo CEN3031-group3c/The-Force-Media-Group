@@ -83,9 +83,6 @@ export function create(req, res) {
 
 // Updates an existing Blog in the DB
 export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
   return Blog.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
