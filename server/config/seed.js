@@ -5,6 +5,15 @@
 
 'use strict';
 import User from '../api/user/user.model';
+import AdminPicture from '../api/adminPicture/adminPicture.model';
+
+AdminPicture.find({}).remove()
+  .then( () => {
+    return AdminPicture.create({
+      url:"https://drive.google.com/uc?id=0B-viYPCddrMLLTFramFTdmN5eTA",
+      name: "aboutMe"
+    });
+  });
 
 User.find({}).remove()
   .then(() => {

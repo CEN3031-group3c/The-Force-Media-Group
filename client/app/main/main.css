@@ -17,6 +17,11 @@ p {
   letter-spacing: -1px;
 }
 
+#img-headshot {
+  width: 220px;
+  height: 200px;
+}
+
 .video-container {
     position: relative;
     padding-bottom: 56.25%;

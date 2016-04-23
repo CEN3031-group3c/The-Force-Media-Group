@@ -1,85 +1,26 @@
 navbar
 
 .container
-  md-button.md-raised.md-primary(type="button" ng-click="showDialog()") Send text
+  md-button.md-raised.md-primary(type="button" ng-click="showDialog()" style="margin-left:0px") Send text
   p.text-white The delete user and user index api routes are restricted to users with the 'admin' role.
-  
     p.text-white(ng-repeat='user in users')
       strong {{user.name}}
       br
-      span {{user.email}}
-      md-button.md-raised.md-warn(type="button" ng-click='delete(user)')
+      span.text-muted {{user.email}}
+      md-button#deleteUserButton.md-fab.md-mini(type="submit" title="delete" data-toggle="tooltip" ng-click='delete(user)' aria-label="deleteUser")
         span.glyphicon.glyphicon-trash
-
-  //.container
-    h3
-      | Default Color Theme
-    .col-xs-12
-      div.color1Default.col-xs-5.colorPanel
-      div.col-xs-7
-    .col-xs-12
-      div.color2Default.col-xs-5.colorPanel
-      div.col-xs-7
-    .col-xs-12
-      div.color3Default.col-xs-5.colorPanel
-      div.col-xs-7
-    .col-xs-12
-      div.color4Default.col-xs-5.colorPanel
-      div.col-xs-7
-    .col-xs-12
-      div.color5Default.col-xs-5.colorPanel
-      div.col-xs-7
-
-  //.container
-    h3
-      | Custom Color Theme
-    .col-xs-12
-      div.col-xs-5.colorPanel(ng-style="{'background-color': themeColors[0].colorCode}")
-      div.col-xs-7
-    .col-xs-12
-      div.col-xs-5.colorPanel(ng-style="{'background-color': themeColors[1].colorCode}")
-      div.col-xs-7
-    .col-xs-12
-      div.col-xs-5.colorPanel(ng-style="{'background-color': themeColors[2].colorCode}")
-      div.col-xs-7
-    .col-xs-12
-      div.col-xs-5.colorPanel(ng-style="{'background-color': themeColors[3].colorCode}")
-      div.col-xs-7
-    .col-xs-12
-      div.col-xs-5.colorPanel(ng-style="{'background-color': themeColors[4].colorCode}")
-      div.col-xs-7
-
-  //.container
-    form
-      br
-      | Color 1:
-      input.textBoxPadding(type="text", placeholder="#094d74", ng-model="customColors[0].colorCode")
-      br
-      | Color 2:
-      input.textBoxPadding(type="text", placeholder="#759cd8", ng-model="customColors[1].colorCode")
-      br
-      | Color 3:
-      input.textBoxPadding(type="text", placeholder="#9cb9d1", ng-model="customColors[2].colorCode")
-      br
-      | Color 4:
-      input.textBoxPadding(type="text", placeholder="#cfdaec", ng-model="customColors[3].colorCode")
-      br
-      | Color 5:
-      input.textBoxPadding(type="text", placeholder="#eef0f6", ng-model="customColors[4].colorCode")
-      br
-
-      a.btn.btn-xs.btn-default.textBoxPadding(ng-click="saveCustomColorTheme()")
-        | Save
-      br
-      br
+.container
+  div(ng-repeat="picture in pictures")      
+    label {{picture.name}}
+    input#aboutMeInput(type="text" ng-model="picture.url").form-control
+    md-button#update-picture(type="button" ng-click="updatePicture($index)") Update Picture  
 
 footer
-
+  
 modal-dialog(show="dialogVisible" dialog-title="Send text message to users" height="250px" width="30%")
   textarea(placeholder="Hey everyone! Check out the new video." ng-model="textBody" style="margin-top:20px;height:100px;").form-control
-
-  div(style="margin-top:10px")
-    button.btn.btn-xs.btn-default(ng-click="hideDialog()")
-      | Cancel
-    button.btn.btn-xs.btn-success#removeItemButton(ng-click="sendText(textBody)")
-      | Send Text
+    div(style="margin-top:10px")
+      button.btn.btn-xs.btn-default(ng-click="hideDialog()")
+        | Cancel
+      button.btn.btn-xs.btn-success#removeItemButton(ng-click="sendText(textBody)")
+        | Send Text

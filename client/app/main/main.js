@@ -10,3 +10,5 @@ angular.module('fmgApp')
         controllerAs: 'main'
       });
   });
+
+// jarmone needs to get the sharable link from the image and then change "open" to "uc"

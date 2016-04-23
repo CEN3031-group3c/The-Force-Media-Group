@@ -49,6 +49,8 @@ angular.module('fmgApp')
         total += item.Price * item.Quantity;
       });
 
+      console.info("HERE");
+      console.info($scope.orderTotal);
       $scope.orderTotal = total;
       console.log('updated total');
     }, true);

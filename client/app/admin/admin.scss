@@ -18,12 +18,24 @@
 }
 
 .ng-modal-dialog {
-	background-color: #777777;	
+	background-color: #777777;
+}
+
+#update-picture {
+	margin-top: 12px;
+	margin-left: 0px;
+	background: #777777;
+}
+
+#deleteUserButton {
+	float: right;
+	margin-top: 0px;
 }
 
 .colorPanel {
 	height:40px;
 }
+
 .color1Default {
 	background-color:#094d74;
 }
